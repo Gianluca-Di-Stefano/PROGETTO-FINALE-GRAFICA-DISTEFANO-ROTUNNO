@@ -212,9 +212,11 @@ void multipleObjects(camera cam, hittable_list world) {
 	texture* blu    = new image_texture("../models/blu.jpg");
 	texture* grigio = new image_texture("../models/grigio.jpg");
 	texture* bianco = new image_texture("../models/bianco.jpg");
+	texture* marmo = new image_texture("../models/marble.jpg");
+	texture* scacchiera = new image_texture("../models/floor.jpg");
 
 	//Sampler
-	int num_samples = 64;
+	int num_samples = 1;
 	float min_amount = 0.25f;
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
@@ -229,7 +231,7 @@ void multipleObjects(camera cam, hittable_list world) {
 	auto instance_ptr_cubo = make_shared<instance>(cube, m_cube);
 	instance_ptr_cubo->scale(40.0, 1.0, 40.0);
 	instance_ptr_cubo->translate(0.0f, -0.5f, 0.0f);
-	m_cube->texture = grigio;
+	m_cube->texture = scacchiera;
 	world.add(instance_ptr_cubo);
 
 	//Cube muro1
@@ -237,7 +239,7 @@ void multipleObjects(camera cam, hittable_list world) {
 	auto instance_ptr_cubo2 = make_shared<instance>(cube, m_cube2);
 	instance_ptr_cubo2->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo2->translate(-2.3f, 1.5f, -0.5f);
-	m_cube2->texture = verde;
+	m_cube2->texture = marmo;
 	world.add(instance_ptr_cubo2);
 
 	//Cube muro3
@@ -246,7 +248,7 @@ void multipleObjects(camera cam, hittable_list world) {
 	instance_ptr_cubo3->scale(0.1, 3.0, 4.6);
 	instance_ptr_cubo3->translate(3.0f, 1.5f, 0.0f);
 	instance_ptr_cubo3->rotate_y(90.0f);
-	m_cube3->texture = giallo;
+	m_cube3->texture = marmo;
 	world.add(instance_ptr_cubo3);
 
 	//Coniglio 
@@ -282,7 +284,7 @@ void city(camera cam, hittable_list world) {
 	texture* bianco = new image_texture("../models/bianco.jpg");
 
 	//Sampler
-	int num_samples = 64;
+	int num_samples = 1;
 	float min_amount = 0.35f;
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
