@@ -216,7 +216,7 @@ void multipleObjects(camera cam, hittable_list world) {
 	texture* scacchiera = new image_texture("../models/floor.jpg");
 
 	//Sampler
-	int num_samples = 128;
+	int num_samples = 64;
 	float min_amount = 0.25f;
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
@@ -235,7 +235,7 @@ void multipleObjects(camera cam, hittable_list world) {
 	world.add(instance_ptr_cubo);
 
 	//Cube muro1
-	material* m_cube2 = new material(getColor("green"), getColor("green"), getColor("white"), 0.8f, 0.0f);
+	material* m_cube2 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_cubo2 = make_shared<instance>(cube, m_cube2);
 	instance_ptr_cubo2->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo2->translate(-2.3f, 1.5f, -0.5f);
@@ -243,7 +243,7 @@ void multipleObjects(camera cam, hittable_list world) {
 	world.add(instance_ptr_cubo2);
 
 	//Cube muro3
-	material* m_cube3 = new material(getColor("yellow"), getColor("yellow"), getColor("white"), 0.8f, 0.0f);
+	material* m_cube3 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_cubo3 = make_shared<instance>(cube, m_cube3);
 	instance_ptr_cubo3->scale(0.1, 3.0, 4.6);
 	instance_ptr_cubo3->translate(3.0f, 1.5f, 0.0f);
@@ -252,7 +252,7 @@ void multipleObjects(camera cam, hittable_list world) {
 	world.add(instance_ptr_cubo3);
 
 	//Coniglio 
-	/*mesh* bunny = new mesh("../models/david.obj", "../models/");
+	mesh* bunny = new mesh("../models/david5perc.obj", "../models/");
 	texture* colore_bunny = new image_texture("../models/bianco.jpg");
 	material* m_bunny = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_bunny = make_shared<instance>(bunny, m_bunny);
@@ -261,7 +261,7 @@ void multipleObjects(camera cam, hittable_list world) {
 	instance_ptr_bunny->translate(-1.0f, 0.0f, -1.5f);
 	m_bunny->texture = colore_bunny;
 	world.add(instance_ptr_bunny);
-	*/
+
 	cam.lookfrom = point3(1, 2, 3.5);
 	cam.lookat = point3(-0.5, 1.2, 0);
 
@@ -645,7 +645,7 @@ int main(int argc, char* argv[])
 	camera cam;
 
 	cam.aspect_ratio = 16.0f / 9.0f;
-	cam.image_width = 600;
+	cam.image_width = 1280;
 	cam.samples_per_pixel = 4;
 	cam.vfov = 20;
 
