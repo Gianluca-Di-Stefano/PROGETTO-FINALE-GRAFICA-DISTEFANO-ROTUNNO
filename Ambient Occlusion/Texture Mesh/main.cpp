@@ -216,7 +216,7 @@ void multipleObjects(camera cam, hittable_list world) {
 	texture* scacchiera = new image_texture("../models/floor.jpg");
 
 	//Sampler
-	int num_samples = 1;
+	int num_samples = 128;
 	float min_amount = 0.25f;
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
@@ -228,10 +228,10 @@ void multipleObjects(camera cam, hittable_list world) {
 	//Cube base
 	mesh* cube = new mesh("../models/cube.obj", "../models/");
 	material* m_cube = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	m_cube->texture = scacchiera;
 	auto instance_ptr_cubo = make_shared<instance>(cube, m_cube);
 	instance_ptr_cubo->scale(40.0, 1.0, 40.0);
-	instance_ptr_cubo->translate(0.0f, -0.5f, 0.0f);
-	m_cube->texture = scacchiera;
+	instance_ptr_cubo->translate(0.0f, -0.5f, 0.0f);	
 	world.add(instance_ptr_cubo);
 
 	//Cube muro1
@@ -239,7 +239,7 @@ void multipleObjects(camera cam, hittable_list world) {
 	auto instance_ptr_cubo2 = make_shared<instance>(cube, m_cube2);
 	instance_ptr_cubo2->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo2->translate(-2.3f, 1.5f, -0.5f);
-	m_cube2->texture = marmo;
+	m_cube2->texture = scacchiera;
 	world.add(instance_ptr_cubo2);
 
 	//Cube muro3
@@ -248,19 +248,20 @@ void multipleObjects(camera cam, hittable_list world) {
 	instance_ptr_cubo3->scale(0.1, 3.0, 4.6);
 	instance_ptr_cubo3->translate(3.0f, 1.5f, 0.0f);
 	instance_ptr_cubo3->rotate_y(90.0f);
-	m_cube3->texture = marmo;
+	m_cube3->texture = scacchiera;
 	world.add(instance_ptr_cubo3);
 
 	//Coniglio 
-	mesh* bunny = new mesh("../models/bunny.obj", "../models/");
+	/*mesh* bunny = new mesh("../models/david.obj", "../models/");
 	texture* colore_bunny = new image_texture("../models/bianco.jpg");
-	material* m_bunny = new material(getColor("blue"), getColor("blue"), getColor("white"), 0.8f, 0.0f);
+	material* m_bunny = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_bunny = make_shared<instance>(bunny, m_bunny);
-	instance_ptr_bunny->rotate_y(45.0f);
-	instance_ptr_bunny->translate(-1.0f, 0.0f, -2.0f);
+	instance_ptr_bunny->scale(0.007, 0.007, 0.007);
+	//instance_ptr_bunny->rotate_y(45.0f);
+	instance_ptr_bunny->translate(-1.0f, 0.0f, -1.5f);
 	m_bunny->texture = colore_bunny;
 	world.add(instance_ptr_bunny);
-
+	*/
 	cam.lookfrom = point3(1, 2, 3.5);
 	cam.lookat = point3(-0.5, 1.2, 0);
 
