@@ -28,7 +28,7 @@
 
 using namespace std;
 
-int init(int width, int height) {
+int init(int width, int height)  {
 	/* // Initialize SDL2. */
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
@@ -372,7 +372,7 @@ void pointLight(camera cam, hittable_list world) {
 	texture* bianco = new image_texture("../models/grigio.jpg");
 
 	//Sampler
-	int num_samples = 64;
+	int num_samples = 1;
 	float min_amount = 0.25f;
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
@@ -404,7 +404,7 @@ void pointLight(camera cam, hittable_list world) {
 	world.add(instance_ptr_cubo2);
 
 	//Cube muro1
-	material* m_cube3 = new material(getColor("red"), getColor("red"), getColor("white"), 0.8f, 0.0f);
+	material* m_cube3 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_cubo3 = make_shared<instance>(cube, m_cube3);
 	instance_ptr_cubo3->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo3->translate(-2.3f, 1.5f, -0.5f);
@@ -412,7 +412,7 @@ void pointLight(camera cam, hittable_list world) {
 	world.add(instance_ptr_cubo3);
 
 	//Cube muro2
-	material* m_cube4 = new material(getColor("green"), getColor("green"), getColor("white"), 0.8f, 0.0f);
+	material* m_cube4 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_cubo4 = make_shared<instance>(cube, m_cube4);
 	instance_ptr_cubo4->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo4->translate(2.3f, 1.5f, -0.5f);
@@ -428,13 +428,24 @@ void pointLight(camera cam, hittable_list world) {
 	m_cube5->texture = bianco;
 	world.add(instance_ptr_cubo5);
 
+	//David
+	mesh* david_obj = new mesh("../models/david5perc.obj", "../models/");
+	texture* davidtex = new image_texture("../models/marble.jpg");
+	material* m_david_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	auto instance_ptr_david_obj = make_shared<instance>(david_obj, m_david_obj);
+	instance_ptr_david_obj->scale(0.007, 0.007, 0.007);
+	instance_ptr_david_obj->rotate_y(-45.0f);
+	instance_ptr_david_obj->translate(-1.0f, 0.0f, 0.0f);
+	m_david_obj->texture = davidtex;
+	world.add(instance_ptr_david_obj);
+
 	//Palla obj
-	mesh* sfera_obj = new mesh("../models/futbol.obj", "../models/");
-	texture* balltex = new image_texture("../models/BallYellow.jpg");
+	mesh* sfera_obj = new mesh("../models/sfera.obj", "../models/");
+	texture* balltex = new image_texture("../models/BallOrange.jpg");
 	material* m_sfera_obj = new material(getColor("yellow"), getColor("yellow"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_sfera_obj = make_shared<instance>(sfera_obj, m_sfera_obj);
-	instance_ptr_sfera_obj->scale(0.06, 0.06, 0.06);
-	instance_ptr_sfera_obj->translate(-1.0f, 0.6f, 0.0f);
+	instance_ptr_sfera_obj->scale(0.1, 0.1, 0.1);
+	instance_ptr_sfera_obj->translate(1.0f, 0.0f, 1.0f);
 	m_sfera_obj->texture = balltex;
 	world.add(instance_ptr_sfera_obj);
 
@@ -462,7 +473,7 @@ void spotLight(camera cam, hittable_list world) {
 	texture* bianco = new image_texture("../models/grigio.jpg");
 
 	//Sampler
-	int num_samples = 64;
+	int num_samples = 1;
 	float min_amount = 0.25f;
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
@@ -472,9 +483,9 @@ void spotLight(camera cam, hittable_list world) {
 	occluder_ptr->set_sampler(sampler_ptr);
 
 	//Luce spot_light
-	point3 light_positionS(0, 3.5, -1.0);
-	vec3 light_direction = light_positionS - point3(0.0f, 0.0f, -1.0f);
-	spot_light* spotLight = new spot_light(light_positionS, light_direction, 70.0f, getColor("darkgray"), getColor("lightgray"), getColor("lightgray"));
+	point3 light_positionS(2.5, 5.0, 0.0);
+	vec3 light_direction = light_positionS - point3(0.0f, 0.0f, 0.0f);
+	spot_light* spotLight = new spot_light(light_positionS, light_direction, 15.0f, getColor("lightyellow"), getColor("lightyellow"), getColor("lightyellow"));
 	world.addLight(spotLight);
 
 	//Cube base
@@ -489,14 +500,13 @@ void spotLight(camera cam, hittable_list world) {
 	//Cube sopra
 	material* m_cube2 = new material(getColor("blue"), getColor("blue"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_cubo2 = make_shared<instance>(cube, m_cube2);
-	instance_ptr_cubo2->rotate_y(45.0f);
-	instance_ptr_cubo2->scale(1.4, 2.0, 1.4);
+	instance_ptr_cubo2->scale(1.4, 2.4, 1.4);
 	instance_ptr_cubo2->translate(1.2f, 1.0f, -1.0f);
 	m_cube2->texture = blu;
 	world.add(instance_ptr_cubo2);
 
 	//Cube muro1
-	material* m_cube3 = new material(getColor("red"), getColor("red"), getColor("white"), 0.8f, 0.0f);
+	material* m_cube3 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_cubo3 = make_shared<instance>(cube, m_cube3);
 	instance_ptr_cubo3->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo3->translate(-2.3f, 1.5f, -0.5f);
@@ -504,7 +514,7 @@ void spotLight(camera cam, hittable_list world) {
 	world.add(instance_ptr_cubo3);
 
 	//Cube muro2
-	material* m_cube4 = new material(getColor("green"), getColor("green"), getColor("white"), 0.8f, 0.0f);
+	material* m_cube4 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_cubo4 = make_shared<instance>(cube, m_cube4);
 	instance_ptr_cubo4->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo4->translate(2.3f, 1.5f, -0.5f);
@@ -520,13 +530,24 @@ void spotLight(camera cam, hittable_list world) {
 	m_cube5->texture = bianco;
 	world.add(instance_ptr_cubo5);
 
+	//David
+	mesh* david_obj = new mesh("../models/david5perc.obj", "../models/");
+	texture* davidtex = new image_texture("../models/marble.jpg");
+	material* m_david_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	auto instance_ptr_david_obj = make_shared<instance>(david_obj, m_david_obj);
+	instance_ptr_david_obj->scale(0.007, 0.007, 0.007);
+	instance_ptr_david_obj->rotate_y(-45.0f);
+	instance_ptr_david_obj->translate(-1.0f, 0.0f, 0.0f);
+	m_david_obj->texture = davidtex;
+	world.add(instance_ptr_david_obj);
+
 	//Palla obj
-	mesh* sfera_obj = new mesh("../models/futbol.obj", "../models/");
-	texture* balltex = new image_texture("../models/BallYellow.jpg");
+	mesh* sfera_obj = new mesh("../models/sfera.obj", "../models/");
+	texture* balltex = new image_texture("../models/BallOrange.jpg");
 	material* m_sfera_obj = new material(getColor("yellow"), getColor("yellow"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_sfera_obj = make_shared<instance>(sfera_obj, m_sfera_obj);
-	instance_ptr_sfera_obj->scale(0.06, 0.06, 0.06);
-	instance_ptr_sfera_obj->translate(-1.0f, 0.6f, 0.0f);
+	instance_ptr_sfera_obj->scale(0.1, 0.1, 0.1);
+	instance_ptr_sfera_obj->translate(1.0f, 0.0f, 1.0f);
 	m_sfera_obj->texture = balltex;
 	world.add(instance_ptr_sfera_obj);
 
