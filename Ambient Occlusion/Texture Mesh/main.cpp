@@ -372,7 +372,7 @@ void pointLight(camera cam, hittable_list world) {
 	texture* bianco = new image_texture("../models/grigio.jpg");
 
 	//Sampler
-	int num_samples = 1;
+	int num_samples = 64;
 	float min_amount = 0.25f;
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
@@ -382,33 +382,27 @@ void pointLight(camera cam, hittable_list world) {
 	occluder_ptr->set_sampler(sampler_ptr);
 
 	//Luce point_light
-	point3 light_position(-1.0f, 4, 2.0f);
+	point3 light_position(-1.0f, 4, 4.0f);
 	point_light* pointLight = new point_light(light_position, getColor("darkgray"), getColor("lightgray"), getColor("black"));
 	world.addLight(pointLight);
 
 	//Cube base
 	mesh* cube = new mesh("../models/cube.obj", "../models/");
 	material* m_cube = new material(getColor("white"), getColor("white"), getColor("white"), 1.0f, 0.0f);
+	texture* pavimento_texture = new image_texture("../models/Floor_Paint.png");
 	auto instance_ptr_cubo = make_shared<instance>(cube, m_cube);
 	instance_ptr_cubo->scale(40.0, 1.0, 40.0);
 	instance_ptr_cubo->translate(0.0f, -0.5f, 0.0f);
-	m_cube->texture = bianco;
+	m_cube->texture = pavimento_texture;
 	world.add(instance_ptr_cubo);
-
-	//Cube sopra
-	material* m_cube2 = new material(getColor("blue"), getColor("blue"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_cubo2 = make_shared<instance>(cube, m_cube2);
-	instance_ptr_cubo2->scale(1.4, 2.4, 1.4);
-	instance_ptr_cubo2->translate(1.2f, 1.0f, -1.0f);
-	m_cube2->texture = blu;
-	world.add(instance_ptr_cubo2);
-
+	
 	//Cube muro1
 	material* m_cube3 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	texture* muro_texture = new image_texture("../models/South_Wall_Paint.png");
 	auto instance_ptr_cubo3 = make_shared<instance>(cube, m_cube3);
 	instance_ptr_cubo3->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo3->translate(-2.3f, 1.5f, -0.5f);
-	m_cube3->texture = rosso;
+	m_cube3->texture = muro_texture;
 	world.add(instance_ptr_cubo3);
 
 	//Cube muro2
@@ -416,7 +410,7 @@ void pointLight(camera cam, hittable_list world) {
 	auto instance_ptr_cubo4 = make_shared<instance>(cube, m_cube4);
 	instance_ptr_cubo4->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo4->translate(2.3f, 1.5f, -0.5f);
-	m_cube4->texture = verde;
+	m_cube4->texture = muro_texture;
 	world.add(instance_ptr_cubo4);
 
 	//Cube muro3
@@ -425,7 +419,7 @@ void pointLight(camera cam, hittable_list world) {
 	instance_ptr_cubo5->scale(0.1, 3.0, 4.6);
 	instance_ptr_cubo5->translate(3.0f, 1.5f, 0.0f);
 	instance_ptr_cubo5->rotate_y(90.0f);
-	m_cube5->texture = bianco;
+	m_cube5->texture = muro_texture;
 	world.add(instance_ptr_cubo5);
 
 	//Buzz
@@ -494,51 +488,47 @@ void spotLight(camera cam, hittable_list world) {
 	occluder_ptr->set_sampler(sampler_ptr);
 
 	//Luce spot_light
-	point3 light_positionS(0.0, 5.0, 0.0);
-	vec3 light_direction = light_positionS - point3(0.0f, 0.0f, 1.0f);
-	spot_light* spotLight = new spot_light(light_positionS, light_direction, 20.0f, getColor("lightyellow"), getColor("lightyellow"), getColor("lightyellow"));
+	point3 light_positionS(0, 3.5, -1.0);
+	vec3 light_direction = light_positionS - point3(0.0f, 0.0f, -1.0f);
+	spot_light* spotLight = new spot_light(light_positionS, light_direction, 70.0f, getColor("black"), getColor("lightgray"), getColor("lightgray"));
 	world.addLight(spotLight);
 
 	//Cube base
 	mesh* cube = new mesh("../models/cube.obj", "../models/");
 	material* m_cube = new material(getColor("white"), getColor("white"), getColor("white"), 1.0f, 0.0f);
+	texture* pavimento_texture = new image_texture("../models/Floor_Paint.png");
 	auto instance_ptr_cubo = make_shared<instance>(cube, m_cube);
 	instance_ptr_cubo->scale(40.0, 1.0, 40.0);
 	instance_ptr_cubo->translate(0.0f, -0.5f, 0.0f);
-	m_cube->texture = bianco;
+	m_cube->texture = pavimento_texture;
 	world.add(instance_ptr_cubo);
-
-	//Cube sopra
-	material* m_cube2 = new material(getColor("blue"), getColor("blue"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_cubo2 = make_shared<instance>(cube, m_cube2);
-	instance_ptr_cubo2->scale(1.4, 2.4, 1.4);
-	instance_ptr_cubo2->translate(1.2f, 1.0f, -1.0f);
-	m_cube2->texture = blu;
-	world.add(instance_ptr_cubo2);
 
 	//Cube muro1
 	material* m_cube3 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	texture* muro_texture = new image_texture("../models/South_Wall_Paint.png");
 	auto instance_ptr_cubo3 = make_shared<instance>(cube, m_cube3);
 	instance_ptr_cubo3->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo3->translate(-2.3f, 1.5f, -0.5f);
-	m_cube3->texture = rosso;
+	m_cube3->texture = muro_texture;
 	world.add(instance_ptr_cubo3);
 
 	//Cube muro2
 	material* m_cube4 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	texture* muro_texture1 = new image_texture("../models/South_Wall_Paint_1.png");
 	auto instance_ptr_cubo4 = make_shared<instance>(cube, m_cube4);
 	instance_ptr_cubo4->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo4->translate(2.3f, 1.5f, -0.5f);
-	m_cube4->texture = verde;
+	m_cube4->texture = muro_texture1;
 	world.add(instance_ptr_cubo4);
 
 	//Cube muro3
 	material* m_cube5 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	texture* muro_texture2 = new image_texture("../models/South_Wall_Paint_2.png");
 	auto instance_ptr_cubo5 = make_shared<instance>(cube, m_cube5);
 	instance_ptr_cubo5->scale(0.1, 3.0, 4.6);
 	instance_ptr_cubo5->translate(3.0f, 1.5f, 0.0f);
 	instance_ptr_cubo5->rotate_y(90.0f);
-	m_cube5->texture = bianco;
+	m_cube5->texture = muro_texture2;
 	world.add(instance_ptr_cubo5);
 
 	//Buzz
