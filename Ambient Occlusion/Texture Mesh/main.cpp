@@ -203,7 +203,7 @@ void sphereRegular(camera cam, hittable_list world) {
 	}
 }
 
-void multipleObjects(camera cam, hittable_list world) {
+void davidScene(camera cam, hittable_list world) {
 
 	//Colori texture
 	texture* verde  = new image_texture("../models/verde.jpg");
@@ -428,24 +428,35 @@ void pointLight(camera cam, hittable_list world) {
 	m_cube5->texture = bianco;
 	world.add(instance_ptr_cubo5);
 
-	//David
-	mesh* david_obj = new mesh("../models/david5perc.obj", "../models/");
-	texture* davidtex = new image_texture("../models/marble.jpg");
-	material* m_david_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_david_obj = make_shared<instance>(david_obj, m_david_obj);
-	instance_ptr_david_obj->scale(0.007, 0.007, 0.007);
-	instance_ptr_david_obj->rotate_y(-45.0f);
-	instance_ptr_david_obj->translate(-1.0f, 0.0f, 0.0f);
-	m_david_obj->texture = davidtex;
-	world.add(instance_ptr_david_obj);
+	//Buzz
+	mesh* buzz_obj = new mesh("../models/buzz.obj", "../models/");
+	texture* buzz_tex = new image_texture("../models/buzz_texture.jpg");
+	material* m_buzz_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	auto instance_ptr_buzz_obj = make_shared<instance>(buzz_obj, m_buzz_obj);
+	instance_ptr_buzz_obj->scale(0.05, 0.05, 0.05);
+	instance_ptr_buzz_obj->rotate_y(-90.0f);
+	instance_ptr_buzz_obj->translate(1.0f, 0.0f, 1.0f);
+	m_buzz_obj->texture = buzz_tex;
+	world.add(instance_ptr_buzz_obj);
+
+	//Woody
+	mesh* woody_obj = new mesh("../models/woody.obj", "../models/");
+	texture* woody_tex = new image_texture("../models/woody_texture.jpg");
+	material* m_woody_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	auto instance_ptr_woody_obj = make_shared<instance>(woody_obj, m_woody_obj);
+	instance_ptr_woody_obj->scale(0.05, 0.05, 0.05);
+	instance_ptr_woody_obj->rotate_y(90.0f);
+	instance_ptr_woody_obj->translate(-0.7f, 0.0f, 1.0f);
+	m_woody_obj->texture = woody_tex;
+	world.add(instance_ptr_woody_obj);
 
 	//Palla obj
-	mesh* sfera_obj = new mesh("../models/sfera.obj", "../models/");
-	texture* balltex = new image_texture("../models/BallOrange.jpg");
-	material* m_sfera_obj = new material(getColor("yellow"), getColor("yellow"), getColor("white"), 0.8f, 0.0f);
+	mesh* sfera_obj = new mesh("../models/ball.obj", "../models/");
+	texture* balltex = new image_texture("../models/pixar_ball.png");
+	material* m_sfera_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_sfera_obj = make_shared<instance>(sfera_obj, m_sfera_obj);
-	instance_ptr_sfera_obj->scale(0.1, 0.1, 0.1);
-	instance_ptr_sfera_obj->translate(1.0f, 0.0f, 1.0f);
+	instance_ptr_sfera_obj->scale(0.007, 0.007, 0.007);
+	instance_ptr_sfera_obj->translate(0.0f, 0.5f, 1.0f);
 	m_sfera_obj->texture = balltex;
 	world.add(instance_ptr_sfera_obj);
 
@@ -483,9 +494,9 @@ void spotLight(camera cam, hittable_list world) {
 	occluder_ptr->set_sampler(sampler_ptr);
 
 	//Luce spot_light
-	point3 light_positionS(2.5, 5.0, 0.0);
-	vec3 light_direction = light_positionS - point3(0.0f, 0.0f, 0.0f);
-	spot_light* spotLight = new spot_light(light_positionS, light_direction, 15.0f, getColor("lightyellow"), getColor("lightyellow"), getColor("lightyellow"));
+	point3 light_positionS(0.0, 5.0, 0.0);
+	vec3 light_direction = light_positionS - point3(0.0f, 0.0f, 1.0f);
+	spot_light* spotLight = new spot_light(light_positionS, light_direction, 20.0f, getColor("lightyellow"), getColor("lightyellow"), getColor("lightyellow"));
 	world.addLight(spotLight);
 
 	//Cube base
@@ -530,24 +541,35 @@ void spotLight(camera cam, hittable_list world) {
 	m_cube5->texture = bianco;
 	world.add(instance_ptr_cubo5);
 
-	//David
-	mesh* david_obj = new mesh("../models/david5perc.obj", "../models/");
-	texture* davidtex = new image_texture("../models/marble.jpg");
-	material* m_david_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_david_obj = make_shared<instance>(david_obj, m_david_obj);
-	instance_ptr_david_obj->scale(0.007, 0.007, 0.007);
-	instance_ptr_david_obj->rotate_y(-45.0f);
-	instance_ptr_david_obj->translate(-1.0f, 0.0f, 0.0f);
-	m_david_obj->texture = davidtex;
-	world.add(instance_ptr_david_obj);
+	//Buzz
+	mesh* buzz_obj = new mesh("../models/buzz.obj", "../models/");
+	texture* buzz_tex = new image_texture("../models/buzz_texture.jpg");
+	material* m_buzz_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	auto instance_ptr_buzz_obj = make_shared<instance>(buzz_obj, m_buzz_obj);
+	instance_ptr_buzz_obj->scale(0.05, 0.05, 0.05);
+	instance_ptr_buzz_obj->rotate_y(-90.0f);
+	instance_ptr_buzz_obj->translate(1.0f, 0.0f, 1.0f);
+	m_buzz_obj->texture = buzz_tex;
+	world.add(instance_ptr_buzz_obj);
+
+	//Woody
+	mesh* woody_obj = new mesh("../models/woody.obj", "../models/");
+	texture* woody_tex = new image_texture("../models/woody_texture.jpg");
+	material* m_woody_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	auto instance_ptr_woody_obj = make_shared<instance>(woody_obj, m_woody_obj);
+	instance_ptr_woody_obj->scale(0.05, 0.05, 0.05);
+	instance_ptr_woody_obj->rotate_y(90.0f);
+	instance_ptr_woody_obj->translate(-0.7f, 0.0f, 1.0f);
+	m_woody_obj->texture = woody_tex;
+	world.add(instance_ptr_woody_obj);
 
 	//Palla obj
-	mesh* sfera_obj = new mesh("../models/sfera.obj", "../models/");
-	texture* balltex = new image_texture("../models/BallOrange.jpg");
-	material* m_sfera_obj = new material(getColor("yellow"), getColor("yellow"), getColor("white"), 0.8f, 0.0f);
+	mesh* sfera_obj = new mesh("../models/ball.obj", "../models/");
+	texture* balltex = new image_texture("../models/pixar_ball.png");
+	material* m_sfera_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_sfera_obj = make_shared<instance>(sfera_obj, m_sfera_obj);
-	instance_ptr_sfera_obj->scale(0.1, 0.1, 0.1);
-	instance_ptr_sfera_obj->translate(1.0f, 0.0f, 1.0f);
+	instance_ptr_sfera_obj->scale(0.007, 0.007, 0.007);
+	instance_ptr_sfera_obj->translate(0.0f, 0.5f, 1.0f);
 	m_sfera_obj->texture = balltex;
 	world.add(instance_ptr_sfera_obj);
 
@@ -653,7 +675,7 @@ void printMenu() {
 	cout << "--- Menu" << endl;
 	cout << "* Press a for random sampling sphere-plane" << endl;
 	cout << "* Press b for regular sampling sphere-plane" << endl;
-	cout << "* Press c for multiple objects scene" << endl;
+	cout << "* Press c for david scene render" << endl;
 	cout << "* Press d for point light scene" << endl;
 	cout << "* Press e for spot light scene" << endl;
 	cout << "* Press f for ambient occlusion city scene" << endl;
@@ -713,7 +735,7 @@ int main(int argc, char* argv[])
 			case SDLK_c:
 				time_t start, end;
 				time(&start);
-				multipleObjects(cam, world);
+				davidScene(cam, world);
 				time(&end);
 				dif = difftime(end, start);
 				cout << "\n" << "Rendering time: " << dif << "\n";
