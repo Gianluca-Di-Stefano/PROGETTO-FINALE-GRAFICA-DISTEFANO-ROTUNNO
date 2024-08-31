@@ -251,16 +251,16 @@ void davidScene(camera cam, hittable_list world) {
 	m_cube3->texture = scacchiera;
 	world.add(instance_ptr_cubo3);
 
-	//Coniglio 
-	mesh* bunny = new mesh("../models/david5perc.obj", "../models/");
-	texture* colore_bunny = new image_texture("../models/bianco.jpg");
-	material* m_bunny = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_bunny = make_shared<instance>(bunny, m_bunny);
-	instance_ptr_bunny->scale(0.007, 0.007, 0.007);
+	//Busto del David 
+	mesh* dabid = new mesh("../models/david5perc.obj", "../models/");
+	texture* colore_david = new image_texture("../models/bianco.jpg");
+	material* m_david = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	auto instance_ptr_david = make_shared<instance>(dabid, m_david);
+	instance_ptr_david->scale(0.007, 0.007, 0.007);
 	//instance_ptr_bunny->rotate_y(45.0f);
-	instance_ptr_bunny->translate(-1.0f, 0.0f, -1.5f);
-	m_bunny->texture = colore_bunny;
-	world.add(instance_ptr_bunny);
+	instance_ptr_david->translate(-1.0f, 0.0f, -1.5f);
+	m_david->texture = colore_david;
+	world.add(instance_ptr_david);
 
 	cam.lookfrom = point3(1, 2, 3.5);
 	cam.lookat = point3(-0.5, 1.2, 0);
