@@ -225,6 +225,12 @@ void davidScene(camera cam, hittable_list world) {
 	occluder_ptr->set_min_amount(min_amount);
 	occluder_ptr->set_sampler(sampler_ptr);
 
+	//Luce point_light
+	point3 light_position(-1.0f, 4, 4.0f);
+	point_light* pointLight = new point_light(light_position, getColor("darkgray"), getColor("lightgray"), getColor("black"));
+	world.addLight(pointLight);
+
+
 	//Cube base
 	mesh* cube = new mesh("../models/cube.obj", "../models/");
 	material* m_cube = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
@@ -239,7 +245,7 @@ void davidScene(camera cam, hittable_list world) {
 	auto instance_ptr_cubo2 = make_shared<instance>(cube, m_cube2);
 	instance_ptr_cubo2->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo2->translate(-2.3f, 1.5f, -0.5f);
-	m_cube2->texture = scacchiera;
+	m_cube2->texture = bianco;
 	world.add(instance_ptr_cubo2);
 
 	//Cube muro3
@@ -248,12 +254,12 @@ void davidScene(camera cam, hittable_list world) {
 	instance_ptr_cubo3->scale(0.1, 3.0, 4.6);
 	instance_ptr_cubo3->translate(3.0f, 1.5f, 0.0f);
 	instance_ptr_cubo3->rotate_y(90.0f);
-	m_cube3->texture = scacchiera;
+	m_cube3->texture = bianco;
 	world.add(instance_ptr_cubo3);
 
 	//Busto del David 
 	mesh* dabid = new mesh("../models/david5perc.obj", "../models/");
-	texture* colore_david = new image_texture("../models/bianco.jpg");
+	texture* colore_david = new image_texture("../models/marble.jpg");
 	material* m_david = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_david = make_shared<instance>(dabid, m_david);
 	instance_ptr_david->scale(0.007, 0.007, 0.007);
@@ -459,9 +465,9 @@ void pointLight(camera cam, hittable_list world) {
 
 	cam.samples_per_pixel = num_samples;
 	cam.initialize();
-
-	//cam.parallel_render(world);
-	cam.parallel_render(world,*occluder_ptr);
+	
+	cam.parallel_render(world); //senza AO
+	//cam.parallel_render(world,*occluder_ptr); // Con AO
 	SDL_RenderPresent(renderer);
 	string path = "../../screenshot/pointLight/num_samples-" + to_string(num_samples) + "-min_amount-" + to_string(min_amount) + ".bmp";
 	saveScreenshotBMP(path);
