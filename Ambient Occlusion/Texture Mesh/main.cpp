@@ -216,7 +216,7 @@ void davidScene(camera cam, hittable_list world) {
 	texture* scacchiera = new image_texture("../models/floor.jpg");
 
 	//Sampler
-	int num_samples = 64;
+	int num_samples = 32;
 	float min_amount = 0.25f;
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
@@ -225,16 +225,10 @@ void davidScene(camera cam, hittable_list world) {
 	occluder_ptr->set_min_amount(min_amount);
 	occluder_ptr->set_sampler(sampler_ptr);
 
-	//Luce point_light
-	point3 light_position(-1.0f, 4, 4.0f);
-	point_light* pointLight = new point_light(light_position, getColor("darkgray"), getColor("lightgray"), getColor("black"));
-	world.addLight(pointLight);
-
-
 	//Cube base
 	mesh* cube = new mesh("../models/cube.obj", "../models/");
 	material* m_cube = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
-	m_cube->texture = scacchiera;
+	m_cube->texture = bianco;
 	auto instance_ptr_cubo = make_shared<instance>(cube, m_cube);
 	instance_ptr_cubo->scale(40.0, 1.0, 40.0);
 	instance_ptr_cubo->translate(0.0f, -0.5f, 0.0f);	
@@ -258,14 +252,13 @@ void davidScene(camera cam, hittable_list world) {
 	world.add(instance_ptr_cubo3);
 
 	//Busto del David 
-	mesh* dabid = new mesh("../models/david5perc.obj", "../models/");
-	texture* colore_david = new image_texture("../models/marble.jpg");
+	mesh* david = new mesh("../models/david5perc.obj", "../models/");
 	material* m_david = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_david = make_shared<instance>(dabid, m_david);
+	auto instance_ptr_david = make_shared<instance>(david, m_david);
 	instance_ptr_david->scale(0.007, 0.007, 0.007);
 	//instance_ptr_bunny->rotate_y(45.0f);
 	instance_ptr_david->translate(-1.0f, 0.0f, -1.5f);
-	m_david->texture = colore_david;
+	m_david->texture = bianco;
 	world.add(instance_ptr_david);
 
 	cam.lookfrom = point3(1, 2, 3.5);
@@ -276,7 +269,7 @@ void davidScene(camera cam, hittable_list world) {
 
 	cam.parallel_render(world, *occluder_ptr);
 	SDL_RenderPresent(renderer);
-	string path = "../../screenshot/multipleObjects/num_samples-" + to_string(num_samples) +"-min_amount-"+ to_string(min_amount) + ".bmp";
+	string path = "../../screenshot/AO_scene/num_samples-" + to_string(num_samples) +"-min_amount-"+ to_string(min_amount) + ".bmp";
 	saveScreenshotBMP(path);
 }
 

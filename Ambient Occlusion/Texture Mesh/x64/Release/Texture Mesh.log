@@ -36,28 +36,28 @@ C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Textur
 C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\camera.h(175,12): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
 C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(129,45): warning C4305: 'argomento': troncamento da 'double' a 'const float'
 C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(178,45): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(246,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(254,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(265,47): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(272,34): warning C4305: 'argomento': troncamento da 'double' a 'float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(409,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(417,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(425,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(436,47): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(447,48): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(458,51): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(464,31): warning C4305: 'argomento': troncamento da 'double' a 'float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(516,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(525,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(534,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(545,47): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(556,48): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(567,51): warning C4305: 'argomento': troncamento da 'double' a 'const float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(573,31): warning C4305: 'argomento': troncamento da 'double' a 'float'
-C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(650,45): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(240,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(248,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(258,47): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(265,34): warning C4305: 'argomento': troncamento da 'double' a 'float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(402,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(410,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(418,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(429,47): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(440,48): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(451,51): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(457,31): warning C4305: 'argomento': troncamento da 'double' a 'float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(509,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(518,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(527,41): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(538,47): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(549,48): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(560,51): warning C4305: 'argomento': troncamento da 'double' a 'const float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(566,31): warning C4305: 'argomento': troncamento da 'double' a 'float'
+C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\Texture Mesh\main.cpp(643,45): warning C4305: 'argomento': troncamento da 'double' a 'const float'
   Generazione codice in corso...
   1 of 2025 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    10 functions had inline decision re-evaluated but remain unchanged
+    4 functions had inline decision re-evaluated but remain unchanged
   Generazione codice terminata
   Texture Mesh.vcxproj -> C:\Users\lucar\Documents\GitHub\PROGETTO-FINALE-GRAFICA\Ambient Occlusion\x64\Release\Texture Mesh.exe
