@@ -123,8 +123,8 @@ void sphereMultiJittered(camera cam, hittable_list world) {
 
 	//Sfera principale 
 	mesh* sfera_obj = new mesh("../models/sfera.obj", "../models/");
-	texture* colore_sfera_obj = new image_texture("../models/giallo.jpg");
-	material* m_sfera_obj = new material(getColor("yellow"), getColor("yellow"), getColor("white"), 0.8f, 0.0f);
+	texture* colore_sfera_obj = new image_texture("../models/rosso.jpg");
+	material* m_sfera_obj = new material(getColor("red"), getColor("red"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_sfera_obj = make_shared<instance>(sfera_obj, m_sfera_obj);
 	instance_ptr_sfera_obj->scale(0.3, 0.3, 0.3);
 	m_sfera_obj->texture = colore_sfera_obj;
@@ -136,7 +136,7 @@ void sphereMultiJittered(camera cam, hittable_list world) {
 
 	int num_samples = 0;
 
-	std::vector<int> vec_samples = { 1, 16, 64, 256 };
+	std::vector<int> vec_samples = { 1, 16, 64, 128, 256 };
 
 	for (int i = 0; i < vec_samples.size(); i++) {
 		//Sampler setting
