@@ -216,8 +216,8 @@ void davidScene(camera cam, hittable_list world) {
 	texture* scacchiera = new image_texture("../models/floor.jpg");
 
 	//Sampler
-	int num_samples = 32;
-	float min_amount = 0.25f;
+	int num_samples = 256;
+	float min_amount = 0.0f;
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
 	//Luce ambient occluder
@@ -257,7 +257,7 @@ void davidScene(camera cam, hittable_list world) {
 	auto instance_ptr_david = make_shared<instance>(david, m_david);
 	instance_ptr_david->scale(0.007, 0.007, 0.007);
 	//instance_ptr_bunny->rotate_y(45.0f);
-	instance_ptr_david->translate(-1.0f, 0.0f, -1.5f);
+	instance_ptr_david->translate(-1.6f, 0.0f, -1.5f);
 	m_david->texture = bianco;
 	world.add(instance_ptr_david);
 
