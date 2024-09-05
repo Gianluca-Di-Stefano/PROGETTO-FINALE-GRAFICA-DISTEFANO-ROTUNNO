@@ -216,8 +216,8 @@ void davidScene(camera cam, hittable_list world) {
 	texture* scacchiera = new image_texture("../models/floor.jpg");
 
 	//Sampler
-	int num_samples = 256;
-	float min_amount = 0.0f;
+	int num_samples = 64;
+	float min_amount = 0.25f;
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
 	//Luce ambient occluder
