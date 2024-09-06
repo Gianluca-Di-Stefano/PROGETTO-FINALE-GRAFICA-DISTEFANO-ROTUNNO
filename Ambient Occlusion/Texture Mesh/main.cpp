@@ -225,7 +225,7 @@ void davidScene(camera cam, hittable_list world) {
 	occluder_ptr->set_min_amount(min_amount);
 	occluder_ptr->set_sampler(sampler_ptr);
 
-	//Cube base
+	//Cube pavimento
 	mesh* cube = new mesh("../models/cube.obj", "../models/");
 	material* m_cube = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	m_cube->texture = bianco;
@@ -256,7 +256,7 @@ void davidScene(camera cam, hittable_list world) {
 	material* m_david = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_david = make_shared<instance>(david, m_david);
 	instance_ptr_david->scale(0.007, 0.007, 0.007);
-	//instance_ptr_bunny->rotate_y(45.0f);
+	//instance_ptr_david->rotate_y(45.0f);
 	instance_ptr_david->translate(-1.6f, 0.0f, -1.5f);
 	m_david->texture = bianco;
 	world.add(instance_ptr_david);
@@ -269,7 +269,7 @@ void davidScene(camera cam, hittable_list world) {
 
 	cam.parallel_render(world, *occluder_ptr);
 	SDL_RenderPresent(renderer);
-	string path = "../../screenshot/AO_scene/num_samples-" + to_string(num_samples) +"-min_amount-"+ to_string(min_amount) + ".bmp";
+	string path = "../../screenshot/david_scene/num_samples-" + to_string(num_samples) +"-min_amount-"+ to_string(min_amount) + ".bmp";
 	saveScreenshotBMP(path);
 }
 
@@ -477,7 +477,7 @@ void spotLight(camera cam, hittable_list world) {
 	texture* bianco = new image_texture("../models/grigio.jpg");
 
 	//Sampler
-	int num_samples = 1;
+	int num_samples = 64;
 	float min_amount = 0.25f;
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
@@ -487,70 +487,44 @@ void spotLight(camera cam, hittable_list world) {
 	occluder_ptr->set_sampler(sampler_ptr);
 
 	//Luce spot_light
-	point3 light_positionS(0, 3.5, -1.0);
-	vec3 light_direction = light_positionS - point3(0.0f, 0.0f, -1.0f);
-	spot_light* spotLight = new spot_light(light_positionS, light_direction, 70.0f, getColor("black"), getColor("lightgray"), getColor("lightgray"));
+	point3 light_positionS(-2.0f, 6.5f, 10.0f);
+	vec3 light_direction = light_positionS - point3(1.0f, 0.0f, 0.0f);
+	spot_light* spotLight = new spot_light(light_positionS, light_direction, 100.0f, getColor("darkgray"), getColor("lightgray"), getColor("lightgray"));
 	world.addLight(spotLight);
 
 	//Cube base
 	mesh* cube = new mesh("../models/cube.obj", "../models/");
 	material* m_cube = new material(getColor("white"), getColor("white"), getColor("white"), 1.0f, 0.0f);
-	texture* pavimento_texture = new image_texture("../models/Floor_Paint.png");
 	auto instance_ptr_cubo = make_shared<instance>(cube, m_cube);
 	instance_ptr_cubo->scale(40.0, 1.0, 40.0);
 	instance_ptr_cubo->translate(0.0f, -0.5f, 0.0f);
-	m_cube->texture = pavimento_texture;
+	m_cube->texture = bianco;
 	world.add(instance_ptr_cubo);
 
 	//Cube muro1
-	material* m_cube3 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
-	texture* muro_texture = new image_texture("../models/South_Wall_Paint.png");
+	material* m_cube3 = new material(getColor("blue"), getColor("blue"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_cubo3 = make_shared<instance>(cube, m_cube3);
-	instance_ptr_cubo3->scale(0.1, 3.0, 5.0);
+	instance_ptr_cubo3->scale(0.1, 3.0, 6.0);
 	instance_ptr_cubo3->translate(-2.3f, 1.5f, -0.5f);
-	m_cube3->texture = muro_texture;
+	m_cube3->texture = rosso;
 	world.add(instance_ptr_cubo3);
 
 	//Cube muro2
-	material* m_cube4 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
-	texture* muro_texture1 = new image_texture("../models/South_Wall_Paint_1.png");
+	material* m_cube4 = new material(getColor("blue"), getColor("blue"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_cubo4 = make_shared<instance>(cube, m_cube4);
-	instance_ptr_cubo4->scale(0.1, 3.0, 5.0);
+	instance_ptr_cubo4->scale(0.1, 3.0, 6.0);
 	instance_ptr_cubo4->translate(2.3f, 1.5f, -0.5f);
-	m_cube4->texture = muro_texture1;
+	m_cube4->texture = verde;
 	world.add(instance_ptr_cubo4);
 
 	//Cube muro3
-	material* m_cube5 = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
-	texture* muro_texture2 = new image_texture("../models/South_Wall_Paint_2.png");
+	material* m_cube5 = new material(getColor("green"), getColor("green"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_cubo5 = make_shared<instance>(cube, m_cube5);
-	instance_ptr_cubo5->scale(0.1, 3.0, 4.6);
+	instance_ptr_cubo5->scale(0.1, 3.0, 5.0);
 	instance_ptr_cubo5->translate(3.0f, 1.5f, 0.0f);
 	instance_ptr_cubo5->rotate_y(90.0f);
-	m_cube5->texture = muro_texture2;
+	m_cube5->texture = bianco;
 	world.add(instance_ptr_cubo5);
-
-	//Buzz
-	mesh* buzz_obj = new mesh("../models/buzz.obj", "../models/");
-	texture* buzz_tex = new image_texture("../models/buzz_texture.jpg");
-	material* m_buzz_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_buzz_obj = make_shared<instance>(buzz_obj, m_buzz_obj);
-	instance_ptr_buzz_obj->scale(0.05, 0.05, 0.05);
-	instance_ptr_buzz_obj->rotate_y(-90.0f);
-	instance_ptr_buzz_obj->translate(1.0f, 0.0f, 1.0f);
-	m_buzz_obj->texture = buzz_tex;
-	world.add(instance_ptr_buzz_obj);
-
-	//Woody
-	mesh* woody_obj = new mesh("../models/woody.obj", "../models/");
-	texture* woody_tex = new image_texture("../models/woody_texture.jpg");
-	material* m_woody_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_woody_obj = make_shared<instance>(woody_obj, m_woody_obj);
-	instance_ptr_woody_obj->scale(0.05, 0.05, 0.05);
-	instance_ptr_woody_obj->rotate_y(90.0f);
-	instance_ptr_woody_obj->translate(-0.7f, 0.0f, 1.0f);
-	m_woody_obj->texture = woody_tex;
-	world.add(instance_ptr_woody_obj);
 
 	//Palla obj
 	mesh* sfera_obj = new mesh("../models/ball.obj", "../models/");
@@ -558,12 +532,22 @@ void spotLight(camera cam, hittable_list world) {
 	material* m_sfera_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_sfera_obj = make_shared<instance>(sfera_obj, m_sfera_obj);
 	instance_ptr_sfera_obj->scale(0.007, 0.007, 0.007);
-	instance_ptr_sfera_obj->translate(0.0f, 0.5f, 1.0f);
+	instance_ptr_sfera_obj->translate(1.0f, 0.5f, 1.0f);
 	m_sfera_obj->texture = balltex;
 	world.add(instance_ptr_sfera_obj);
 
-	cam.lookfrom = point3(0, 2, 9.0f);
-	cam.lookat = point3(0, 1.1, 0);
+	//Busto del David 
+	mesh* david = new mesh("../models/david5perc.obj", "../models/");
+	material* m_david = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	auto instance_ptr_david = make_shared<instance>(david, m_david);
+	instance_ptr_david->scale(0.0075, 0.0075, 0.0075);
+	instance_ptr_david->rotate_y(-45.0f);
+	instance_ptr_david->translate(-0.5f, 0.0f, 1.0f);
+	m_david->texture = bianco;
+	world.add(instance_ptr_david);
+
+	cam.lookfrom = point3(-1.0f, 2.0f, 9.0f);
+	cam.lookat = point3(0.3f, 1.1f, 0);
 
 	cam.samples_per_pixel = num_samples;
 	cam.initialize();
@@ -574,6 +558,7 @@ void spotLight(camera cam, hittable_list world) {
 	string path = "../../screenshot/spotLight/num_samples-" + to_string(num_samples) + "-min_amount-" + to_string(min_amount) + ".bmp";
 	saveScreenshotBMP(path);
 }
+
 
 string test(camera cam, hittable_list world) {
 
@@ -661,14 +646,15 @@ string test(camera cam, hittable_list world) {
 
 void printMenu() {
 	cout << '\n';
-	cout << "--- Menu" << endl;
-	cout << "* Press a for random sampling sphere-plane" << endl;
-	cout << "* Press b for regular sampling sphere-plane" << endl;
-	cout << "* Press c for david scene render" << endl;
-	cout << "* Press d for point light scene" << endl;
-	cout << "* Press e for spot light scene" << endl;
-	cout << "* Press f for ambient occlusion city scene" << endl;
-	cout << "* Press s for make a screenshot" << endl;
+	cout << "+-----------------MENU------------------+" << endl;
+	cout << "+ a. Random sampling sphere-plane       +" << endl;
+	cout << "+ b. regular sampling sphere-plane      +" << endl;
+	cout << "+ c. david scene render                 +" << endl;
+	cout << "+ d. point light scene                  +" << endl;
+	cout << "+ e. spot light scene                   +" << endl;
+	cout << "+ f. ambient occlusion city scene       +" << endl;
+	cout << "+ s. for make a screenshot              +" << endl;
+	cout << "+---------------------------------------+" << endl;
 }
 
 int main(int argc, char* argv[])

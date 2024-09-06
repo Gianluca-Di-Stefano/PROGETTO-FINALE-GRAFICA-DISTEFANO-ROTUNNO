@@ -9,6 +9,7 @@
 #include "color.h"
 #include "light.h"
 
+//Pag.312 - 17.1
 class ambient_occluder : public light {
 public:
     vec3 u, v, w;
@@ -32,11 +33,13 @@ public:
 
 };
 
+//Pag.313 - 17.3
 vec3 ambient_occluder::get_direction(hit_record& sr) {
     point3 sp = sampler_ptr->sample_hemisphere();
     return (sp.e[0] * u + sp.e[1] * v + sp.e[2] * w);
 }
 
+//Pag.313 - 17.4
 bool ambient_occluder::in_shadow(ray& ray, hit_record& sr, hittable_list& world) {
 
     interval t = interval(0.01f, infinity);
@@ -51,6 +54,7 @@ bool ambient_occluder::in_shadow(ray& ray, hit_record& sr, hittable_list& world)
 
 }
 
+//Pag.314 - 17.5
 color ambient_occluder::L(hit_record& sr, hittable_list& world) {
     w = sr.normal;
     v = cross(w, vec3(0.00072, 1.0, 0.0034));
@@ -69,6 +73,7 @@ color ambient_occluder::L(hit_record& sr, hittable_list& world) {
     }
 }
 
+//Pag.313 - 17.2
 void ambient_occluder::set_sampler(sampler* s_ptr) {
     if (sampler_ptr) {
         delete sampler_ptr;
