@@ -284,8 +284,8 @@ void city(camera cam, hittable_list world) {
 	texture* bianco = new image_texture("../models/bianco.jpg");
 
 	//Sampler
-	int num_samples = 128;
-	float min_amount = 0.35f;
+	int num_samples = 256; // 4 64 256 
+	float min_amount = 0.70f;//0.35 0.0
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
 	//Luce ambient occluder
@@ -302,7 +302,7 @@ void city(camera cam, hittable_list world) {
 	mesh* cube = new mesh("../models/cube.obj", "../models/");
 	material* m_cube = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
 	auto instance_ptr_cubo = make_shared<instance>(cube, m_cube);
-	instance_ptr_cubo->scale(40.0, 1.0, 40.0);
+	instance_ptr_cubo->scale(60.0, 1.0, 60.0);
 	instance_ptr_cubo->translate(0.0f, -0.5f, 0.0f);
 	m_cube->texture = bianco;
 	world.add(instance_ptr_cubo);
@@ -347,7 +347,7 @@ void city(camera cam, hittable_list world) {
 		}
 	}
 
-	cam.lookfrom = point3(-3, 15, 15.0f);
+	cam.lookfrom = point3(-20, 15, 15);
 	cam.lookat = point3(-3, 0, -5);
 
 	cam.samples_per_pixel = num_samples;
@@ -663,7 +663,7 @@ int main(int argc, char* argv[])
 	camera cam;
 
 	cam.aspect_ratio = 16.0f / 9.0f;
-	cam.image_width = 1280;
+	cam.image_width = 1280; 
 	cam.samples_per_pixel = 4;
 	cam.vfov = 20;
 
