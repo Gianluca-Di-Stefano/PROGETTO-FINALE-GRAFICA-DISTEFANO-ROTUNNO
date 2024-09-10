@@ -285,7 +285,7 @@ void city(camera cam, hittable_list world) {
 
 	//Sampler
 	int num_samples = 256; // 4 64 256 
-	float min_amount = 0.70f;//0.35 0.0
+	float min_amount = 0.0f;// 0.70 0.35 0.0
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
 	//Luce ambient occluder
@@ -646,15 +646,13 @@ string test(camera cam, hittable_list world) {
 
 void printMenu() {
 	cout << '\n';
-	cout << "+-----------------MENU------------------+" << endl;
-	cout << "+ a. Random sampling sphere-plane       +" << endl;
-	cout << "+ b. regular sampling sphere-plane      +" << endl;
-	cout << "+ c. david scene render                 +" << endl;
-	cout << "+ d. point light scene                  +" << endl;
-	cout << "+ e. spot light scene                   +" << endl;
-	cout << "+ f. ambient occlusion city scene       +" << endl;
-	cout << "+ s. for make a screenshot              +" << endl;
-	cout << "+---------------------------------------+" << endl;
+	cout << "+-----------------MENU-------------------+" << endl;
+	cout << "+ a. Multijittered sampling sphere-plane +" << endl;
+	cout << "+ b. regular sampling sphere-plane       +" << endl;
+	cout << "+ c. david scene render                  +" << endl;
+	cout << "+ d. point light scene                   +" << endl;
+	cout << "+ e. ambient occlusion city scene        +" << endl;
+	cout << "+----------------------------------------+" << endl;
 }
 
 int main(int argc, char* argv[])
@@ -693,9 +691,6 @@ int main(int argc, char* argv[])
 				quit = true;
 				break;
 
-			case SDLK_s:
-				saveScreenshotBMP("screenshot.bmp");
-				break;
 
 			case SDLK_a:
 				sphereMultiJittered(cam, world);
@@ -727,17 +722,9 @@ int main(int argc, char* argv[])
 				printMenu();
 				break;
 
-			case SDLK_e:
-				start, end;
-				time(&start);
-				spotLight(cam, world);
-				time(&end);
-				dif = difftime(end, start);
-				cout << "\n" << "Rendering time: " << dif << "\n";
-				printMenu();
-				break;
+		
 
-			case SDLK_f:
+			case SDLK_e:
 				start, end;
 				time(&start);
 				city(cam, world);
