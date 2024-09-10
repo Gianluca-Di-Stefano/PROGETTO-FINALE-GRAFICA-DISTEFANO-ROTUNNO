@@ -371,7 +371,7 @@ void pointLight(camera cam, hittable_list world) {
 	texture* bianco = new image_texture("../models/grigio.jpg");
 
 	//Sampler
-	int num_samples = 64;
+	int num_samples = 256;
 	float min_amount = 0.25f;
 	multiJittered* sampler_ptr = new multiJittered(num_samples);
 
@@ -383,7 +383,7 @@ void pointLight(camera cam, hittable_list world) {
 	//Luce point_light
 	point3 light_position(-1.0f, 4, 4.0f);
 	point_light* pointLight = new point_light(light_position, getColor("darkgray"), getColor("lightgray"), getColor("black"));
-	world.addLight(pointLight);
+	//world.addLight(pointLight);
 
 	//Cube base
 	mesh* cube = new mesh("../models/cube.obj", "../models/");
@@ -459,189 +459,10 @@ void pointLight(camera cam, hittable_list world) {
 	cam.samples_per_pixel = num_samples;
 	cam.initialize();
 	
-	cam.parallel_render(world); //senza AO
-	//cam.parallel_render(world,*occluder_ptr); // Con AO
+	cam.parallel_render(world,*occluder_ptr); // Con AO
 	SDL_RenderPresent(renderer);
 	string path = "../../screenshot/pointLight/num_samples-" + to_string(num_samples) + "-min_amount-" + to_string(min_amount) + ".bmp";
 	saveScreenshotBMP(path);
-}
-
-void spotLight(camera cam, hittable_list world) {
-
-	//Colori texture
-	texture* verde = new image_texture("../models/verde.jpg");
-	texture* giallo = new image_texture("../models/giallo.jpg");
-	texture* rosso = new image_texture("../models/rosso.jpg");
-	texture* blu = new image_texture("../models/blu.jpg");
-	texture* grigio = new image_texture("../models/grigio.jpg");
-	texture* bianco = new image_texture("../models/grigio.jpg");
-
-	//Sampler
-	int num_samples = 64;
-	float min_amount = 0.25f;
-	multiJittered* sampler_ptr = new multiJittered(num_samples);
-
-	//Luce ambient occluder
-	ambient_occluder* occluder_ptr = new ambient_occluder(getColor("darkgray"), getColor("lightgray"), getColor("black"), 1.0);
-	occluder_ptr->set_min_amount(min_amount);
-	occluder_ptr->set_sampler(sampler_ptr);
-
-	//Luce spot_light
-	point3 light_positionS(-2.0f, 6.5f, 10.0f);
-	vec3 light_direction = light_positionS - point3(1.0f, 0.0f, 0.0f);
-	spot_light* spotLight = new spot_light(light_positionS, light_direction, 100.0f, getColor("darkgray"), getColor("lightgray"), getColor("lightgray"));
-	world.addLight(spotLight);
-
-	//Cube base
-	mesh* cube = new mesh("../models/cube.obj", "../models/");
-	material* m_cube = new material(getColor("white"), getColor("white"), getColor("white"), 1.0f, 0.0f);
-	auto instance_ptr_cubo = make_shared<instance>(cube, m_cube);
-	instance_ptr_cubo->scale(40.0, 1.0, 40.0);
-	instance_ptr_cubo->translate(0.0f, -0.5f, 0.0f);
-	m_cube->texture = bianco;
-	world.add(instance_ptr_cubo);
-
-	//Cube muro1
-	material* m_cube3 = new material(getColor("blue"), getColor("blue"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_cubo3 = make_shared<instance>(cube, m_cube3);
-	instance_ptr_cubo3->scale(0.1, 3.0, 6.0);
-	instance_ptr_cubo3->translate(-2.3f, 1.5f, -0.5f);
-	m_cube3->texture = rosso;
-	world.add(instance_ptr_cubo3);
-
-	//Cube muro2
-	material* m_cube4 = new material(getColor("blue"), getColor("blue"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_cubo4 = make_shared<instance>(cube, m_cube4);
-	instance_ptr_cubo4->scale(0.1, 3.0, 6.0);
-	instance_ptr_cubo4->translate(2.3f, 1.5f, -0.5f);
-	m_cube4->texture = verde;
-	world.add(instance_ptr_cubo4);
-
-	//Cube muro3
-	material* m_cube5 = new material(getColor("green"), getColor("green"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_cubo5 = make_shared<instance>(cube, m_cube5);
-	instance_ptr_cubo5->scale(0.1, 3.0, 5.0);
-	instance_ptr_cubo5->translate(3.0f, 1.5f, 0.0f);
-	instance_ptr_cubo5->rotate_y(90.0f);
-	m_cube5->texture = bianco;
-	world.add(instance_ptr_cubo5);
-
-	//Palla obj
-	mesh* sfera_obj = new mesh("../models/ball.obj", "../models/");
-	texture* balltex = new image_texture("../models/pixar_ball.png");
-	material* m_sfera_obj = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_sfera_obj = make_shared<instance>(sfera_obj, m_sfera_obj);
-	instance_ptr_sfera_obj->scale(0.007, 0.007, 0.007);
-	instance_ptr_sfera_obj->translate(1.0f, 0.5f, 1.0f);
-	m_sfera_obj->texture = balltex;
-	world.add(instance_ptr_sfera_obj);
-
-	//Busto del David 
-	mesh* david = new mesh("../models/david5perc.obj", "../models/");
-	material* m_david = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
-	auto instance_ptr_david = make_shared<instance>(david, m_david);
-	instance_ptr_david->scale(0.0075, 0.0075, 0.0075);
-	instance_ptr_david->rotate_y(-45.0f);
-	instance_ptr_david->translate(-0.5f, 0.0f, 1.0f);
-	m_david->texture = bianco;
-	world.add(instance_ptr_david);
-
-	cam.lookfrom = point3(-1.0f, 2.0f, 9.0f);
-	cam.lookat = point3(0.3f, 1.1f, 0);
-
-	cam.samples_per_pixel = num_samples;
-	cam.initialize();
-
-	//cam.parallel_render(world);
-	cam.parallel_render(world, *occluder_ptr);
-	SDL_RenderPresent(renderer);
-	string path = "../../screenshot/spotLight/num_samples-" + to_string(num_samples) + "-min_amount-" + to_string(min_amount) + ".bmp";
-	saveScreenshotBMP(path);
-}
-
-
-string test(camera cam, hittable_list world) {
-
-	//Definisco i colori
-	color red        = color(1.00f, 0.00f, 0.00f);
-	color green      = color(0.00f, 1.00f, 0.00f);
-	color blue       = color(0.00f, 0.00f, 1.00f);
-	color gray       = color(0.50f, 0.50f, 0.50f);
-	color white      = color(1.00f, 1.00f, 1.00f);
-	color black      = color(0.00f, 0.00f, 0.00f);
-	color darkgray   = color(0.25f, 0.25f, 0.25f);
-	color lightgray  = color(0.75f, 0.75f, 0.75f);
-	color slategray  = color(0.40f, 0.50f, 0.56f);
-	color magenta    = color(1.00f, 0.00f, 1.00f);
-	color cyan       = color(0.00f, 1.00f, 1.00f);
-	color brown      = color(0.60f, 0.40f, 0.12f);
-	color yellow     = color(1.00f, 1.00f, 0.00f);
-	color darkyellow = color(0.65f, 0.65f, 0.00f);
-
-	//Sampler
-	int num_samples = 16;
-	multiJittered* sampler_ptr = new multiJittered(num_samples);
-	//regular* sampler_ptr = new regular(num_samples);
-	//pure_random* sampler_ptr = new pure_random(num_samples);
-
-	//Luce ambient occluder
-	float min_amount = 0.0;
-	ambient_occluder* occluder_ptr = new ambient_occluder(white,white,white,1.0);
-	occluder_ptr->set_min_amount(min_amount);
-	occluder_ptr->set_sampler(sampler_ptr);
-
-	//Luce point_light
-	point3 light_position(0.0f, 6, 0.0f);
-	point_light* pointLight = new point_light(light_position, getColor("darkgray"), getColor("lightgray"), getColor("white"));
-	world.addLight(pointLight);
-
-	//Luce spot_light
-	point3 light_position2(0, 10, 0);
-	vec3 light_direction = light_position2 - point3(0.0f, 0.0f, 0.0f);
-	spot_light* spotLight = new spot_light(light_position2, light_direction, 15.0f, getColor("darkgray"), getColor("lightgray"), getColor("lightgray"));
-	//world.addLight(spotLight);
-
-	//Cube base
-	mesh* cube = new mesh("../models/cube.obj", "../models/");
-	texture* colore_cubo = new image_texture("../models/grigio.jpg");
-	material* m_cube = new material(white, white, white, 1.0f, 0.0f);
-	auto instance_ptr_cubo = make_shared<instance>(cube, m_cube);
-	instance_ptr_cubo->scale(40.0, 1.0, 40.0);
-	instance_ptr_cubo->translate(0.0f, -0.5f, 0.0f);
-	m_cube->texture = colore_cubo;
-	world.add(instance_ptr_cubo);
-
-	////Sfera principale
-	//sphere* sfera = new sphere(); //posizione (0,0,0) e raggio 1.0
-	//material* m_sfera = new material(yellow, yellow, white, 0.8f, 0.0f);
-	//auto instace_ptr_sfera = make_shared<instance>(sfera, m_sfera);
-	//texture* colore_sfera = new image_texture("../models/giallo.jpg");
-	//instace_ptr_sfera->translate(0.0f, 1.0f, 0.0f);
-	//m_sfera->texture = colore_sfera;
-	//world.add(instace_ptr_sfera);
-
-	//Sfera principale obj
-	mesh* sfera_obj = new mesh("../models/sfera.obj", "../models/");
-	texture* colore_sfera_obj = new image_texture("../models/giallo.jpg");
-	material* m_sfera_obj = new material(yellow, yellow, white, 0.8f, 0.0f);
-	auto instance_ptr_sfera_obj = make_shared<instance>(sfera_obj, m_sfera_obj);
-	instance_ptr_sfera_obj->scale(0.3, 0.3, 0.3);
-	//instance_ptr_sfera_obj->translate(0.0f, 0.5f, 0.0f);
-	m_sfera_obj->texture = colore_sfera_obj;
-	world.add(instance_ptr_sfera_obj);
-	
-	cam.lookfrom = point3(0, 5, 10);
-	cam.lookat = point3(0, 0.5, 0);
-	cam.samples_per_pixel = num_samples;
-	cam.initialize();
-
-	//cam.parallel_render(world);
-	cam.parallel_render(world,*occluder_ptr);
-	SDL_RenderPresent(renderer);
-
-	string path = "../../screenshot/test/num_samples-" + to_string(num_samples) + "-min_amount-" + to_string(min_amount);
-
-	return path;
 }
 
 void printMenu() {
@@ -731,18 +552,6 @@ int main(int argc, char* argv[])
 				time(&end);
 				dif = difftime(end, start);
 				cout << "\n" << "Rendering time: " << dif << "\n";
-				printMenu();
-				break;
-
-			case SDLK_z:
-				start, end;
-				time(&start);
-				string path = test(cam, world);
-				time(&end);
-				dif = difftime(end, start);
-				cout << "\n" << "Rendering time: " << dif << "\n";
-				path = path + "-rtime-" + to_string(dif) + ".bmp";
-				saveScreenshotBMP(path);
 				printMenu();
 				break;
 
