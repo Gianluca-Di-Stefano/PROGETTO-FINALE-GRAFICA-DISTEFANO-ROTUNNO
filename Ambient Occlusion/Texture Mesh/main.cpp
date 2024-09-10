@@ -154,6 +154,55 @@ void sphereMultiJittered(camera cam, hittable_list world) {
 	}
 }
 
+void sphereRandom(camera cam, hittable_list world) {
+
+	//Luce ambient occluder
+	ambient_occluder* occluder_ptr = new ambient_occluder(getColor("white"), getColor("white"), getColor("white"), 1.0);
+	occluder_ptr->set_min_amount(0.0);
+
+	//Cube base
+	mesh* cube = new mesh("../models/cube.obj", "../models/");
+	texture* colore_cubo = new image_texture("../models/grigio.jpg");
+	material* m_cube = new material(getColor("white"), getColor("white"), getColor("white"), 0.8f, 0.0f);
+	auto instance_ptr_cubo = make_shared<instance>(cube, m_cube);
+	instance_ptr_cubo->scale(40.0, 1.0, 40.0);
+	instance_ptr_cubo->translate(0.0f, -0.5f, 0.0f);
+	m_cube->texture = colore_cubo;
+	world.add(instance_ptr_cubo);
+
+	//Sfera principale 
+	mesh* sfera_obj = new mesh("../models/sfera.obj", "../models/");
+	texture* colore_sfera_obj = new image_texture("../models/rosso.jpg");
+	material* m_sfera_obj = new material(getColor("red"), getColor("red"), getColor("white"), 0.8f, 0.0f);
+	auto instance_ptr_sfera_obj = make_shared<instance>(sfera_obj, m_sfera_obj);
+	instance_ptr_sfera_obj->scale(0.3, 0.3, 0.3);
+	m_sfera_obj->texture = colore_sfera_obj;
+	world.add(instance_ptr_sfera_obj);
+
+	//Camera
+	cam.lookfrom = point3(0, 5, 10);
+	cam.lookat = point3(0, 0.5, 0);
+
+	int num_samples = 0;
+
+	std::vector<int> vec_samples = { 1, 16, 64, 256 };
+
+	for (int i = 0; i < vec_samples.size(); i++) {
+		//Sampler setting
+		num_samples = vec_samples[i];
+		cam.samples_per_pixel = num_samples;
+		pure_random* sampler_ptr = new pure_random(num_samples);
+		occluder_ptr->set_sampler(sampler_ptr);
+
+		cam.initialize();
+		cam.parallel_render(world, *occluder_ptr);
+		SDL_RenderPresent(renderer);
+
+		string path = "../../screenshot/sphereRandom/num_samples-" + to_string(num_samples) + ".bmp";
+		saveScreenshotBMP(path);
+	}
+}
+
 void sphereRegular(camera cam, hittable_list world) {
 
 	//Luce ambient occluder
@@ -469,10 +518,11 @@ void printMenu() {
 	cout << '\n';
 	cout << "+-----------------MENU-------------------+" << endl;
 	cout << "+ a. Multijittered sampling sphere-plane +" << endl;
-	cout << "+ b. regular sampling sphere-plane       +" << endl;
-	cout << "+ c. david scene render                  +" << endl;
-	cout << "+ d. point light scene                   +" << endl;
-	cout << "+ e. ambient occlusion city scene        +" << endl;
+	cout << "+ b. Regular sampling sphere-plane       +" << endl;
+	cout << "+ c. Random sampling sphere-plane        +" << endl;
+	cout << "+ d. David scene render                  +" << endl;
+	cout << "+ e. Point light scene                   +" << endl;
+	cout << "+ f. Ambient occlusion city scene        +" << endl;
 	cout << "+----------------------------------------+" << endl;
 }
 
@@ -524,6 +574,11 @@ int main(int argc, char* argv[])
 				break;
 
 			case SDLK_c:
+				sphereRandom(cam, world);
+				printMenu();
+				break;
+
+			case SDLK_d:
 				time_t start, end;
 				time(&start);
 				davidScene(cam, world);
@@ -533,7 +588,7 @@ int main(int argc, char* argv[])
 				printMenu();
 				break;
 
-			case SDLK_d:
+			case SDLK_e:
 				start, end;
 				time(&start);
 				pointLight(cam, world);
@@ -543,9 +598,7 @@ int main(int argc, char* argv[])
 				printMenu();
 				break;
 
-		
-
-			case SDLK_e:
+			case SDLK_f:
 				start, end;
 				time(&start);
 				city(cam, world);
